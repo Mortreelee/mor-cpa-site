@@ -78,7 +78,7 @@
       var empty = botSlot.children.length === 0 &&
                   botSlot.textContent.trim() === '';
       if (empty) botFallback.hidden = false;
-    }, 10000);
+    }, 3000);
   }
 
   /* ---------- טופס יצירת קשר ----------

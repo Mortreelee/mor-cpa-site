@@ -326,7 +326,7 @@ p{ margin:0 0 1em; }
   background:#fff;
   border-radius:var(--radius);
   padding:6px;
-  min-height:420px;
+  min-height:0;
   overflow:hidden;
   text-align:start;
   box-shadow:0 10px 34px rgba(0,0,0,.22);
@@ -336,7 +336,7 @@ p{ margin:0 0 1em; }
 
 .chat-fallback{
   display:grid; place-items:center; gap:16px;
-  min-height:380px; padding:30px;
+  min-height:0; padding:38px 30px;
   text-align:center; color:var(--ink-2);
 }
 .chat-fallback[hidden]{ display:none; }
