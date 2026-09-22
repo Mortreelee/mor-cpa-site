@@ -11,7 +11,7 @@
   //   'whatsapp' — נפתח וואטסאפ עם הפרטים מוכנים (עובד מיד, בלי שום הגדרה)
   //   'server'   — הטופס נשלח לשרת. לבחור רק אחרי שהגדרנו Netlify Forms
   //                או Formspree, אחרת הפניות פשוט יאבדו.
-  var FORM_MODE = 'whatsapp';
+  var FORM_MODE = 'server';
 
   /* ---------- שנה בפוטר ---------- */
   var yearEl = document.getElementById('year');
@@ -65,13 +65,16 @@
   }
 
   /* ---------- טופס יצירת קשר ----------
-     כרגע FORM_MODE = 'whatsapp': הטופס פותח וואטסאפ עם הפרטים מוכנים,
-     כך שהוא עובד מהרגע הראשון בלי שום הגדרה בצד שרת.
+     FORM_MODE = 'server': הפניות נשלחות ל-Netlify Forms, ומשם
+     למייל. הטופס ב-index.html כבר מסומן data-netlify עם שדה
+     form-name ומלכודת ספאם (netlify-honeypot).
 
-     כשנרצה שהפניות יגיעו למייל במקום:
-       1. לארח את האתר ב-Netlify (הטופס כבר מסומן ב-data-netlify),
-          או לפתוח חשבון ב-Formspree ולהוסיף action לטופס ב-index.html.
-       2. לשנות למעלה את FORM_MODE ל-'server'.
+     ⚠️ ההתראה למייל מוגדרת בממשק של Netlify, לא כאן:
+     Site configuration → Forms → Form notifications → Email notification.
+     בלעדיה הפניות נשמרות אבל אף מייל לא נשלח.
+
+     'whatsapp' נשאר כמסלול חלופי, וגם משמש אוטומטית
+     בפתיחה מקומית מהדיסק (file://), שם אין לאן לשלוח.
   --------------------------------------------------------------- */
   var form = document.getElementById('contactForm');
   var note = document.getElementById('formNote');
@@ -80,9 +83,42 @@
     var defaultNote = note.textContent;
 
     form.addEventListener('submit', function (e) {
-      // במצב 'server' לא מתערבים — הדפדפן שולח את הטופס כרגיל.
-      // (מלבד בפתיחה מקומית מהדיסק, שם אין לאן לשלוח)
-      if (FORM_MODE === 'server' && location.protocol !== 'file:') return;
+      // מצב 'server': שולחים ל-Netlify ברקע (fetch) במקום לתת לדפדפן
+      // לנווט. אחרת המבקר נזרק לעמוד התודה הגנרי של Netlify — באנגלית,
+      // בלי העיצוב של האתר. ככה הוא נשאר בעמוד ומקבל אישור בעברית.
+      // (בפתיחה מקומית מהדיסק אין לאן לשלוח — נופלים חזרה לוואטסאפ)
+      if (FORM_MODE === 'server' && location.protocol !== 'file:') {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        var btn = form.querySelector('[type="submit"]');
+        var btnLabel = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
+
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            form.reset();
+            note.textContent = 'תודה! הפנייה התקבלה ואחזור בהקדם.';
+            note.className = 'form-note ok';
+          })
+          .catch(function () {
+            note.textContent = 'השליחה נכשלה. אפשר לנסות שוב, או לפנות ישירות בוואטסאפ.';
+            note.className = 'form-note err';
+          })
+          .then(function () {
+            if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+            setTimeout(function () {
+              note.textContent = defaultNote;
+              note.className = 'form-note';
+            }, 8000);
+          });
+        return;
+      }
 
       e.preventDefault();
 
