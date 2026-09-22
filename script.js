@@ -11,7 +11,12 @@
   //   'whatsapp' — נפתח וואטסאפ עם הפרטים מוכנים (עובד מיד, בלי שום הגדרה)
   //   'server'   — הטופס נשלח לשרת. לבחור רק אחרי שהגדרנו Netlify Forms
   //                או Formspree, אחרת הפניות פשוט יאבדו.
-  var FORM_MODE = 'server';
+  // 'treelee'  — שולח למערכת של מור: נפתח ליד ב-CRM + מייל אליה
+  // 'server'   — Netlify Forms (דורש הגדרת התראה בממשק Netlify)
+  // 'whatsapp' — פותח וואטסאפ עם הפרטים מוכנים
+  var FORM_MODE = 'treelee';
+  var TREELEE_ENDPOINT = 'https://treelee.ai/api/treelee/site-contact';
+  var TREELEE_API_KEY = 'tb_05c257614b6f66f681bc9596e793eed4e54c0c02af3d0cdd';
 
   /* ---------- שנה בפוטר ---------- */
   var yearEl = document.getElementById('year');
@@ -65,16 +70,16 @@
   }
 
   /* ---------- טופס יצירת קשר ----------
-     FORM_MODE = 'server': הפניות נשלחות ל-Netlify Forms, ומשם
-     למייל. הטופס ב-index.html כבר מסומן data-netlify עם שדה
-     form-name ומלכודת ספאם (netlify-honeypot).
+     FORM_MODE = 'treelee': הפניה נשלחת למערכת של מור (treelee.ai),
+     נפתחת שם כליד ב-CRM ונשלח מייל התראה. הנתונים לא
+     עוברים דרך אף צד שלישי — כפי שמובטח למבקר מתחת לטופס.
 
-     ⚠️ ההתראה למייל מוגדרת בממשק של Netlify, לא כאן:
-     Site configuration → Forms → Form notifications → Email notification.
-     בלעדיה הפניות נשמרות אבל אף מייל לא נשלח.
+     ה-apiKey כאן הוא מפתח ציבורי ולא סוד: הוא מזהה את הלקוחה
+     בלבד, והשרת מאמת בנוסף שהבקשה הגיעה מדומיין מורשה.
 
-     'whatsapp' נשאר כמסלול חלופי, וגם משמש אוטומטית
-     בפתיחה מקומית מהדיסק (file://), שם אין לאן לשלוח.
+     הטופס נשאר מסומן data-netlify במכוון: אם JavaScript נכשל
+     או נחסם, הדפדפן שולח את הטופס כרגיל ל-Netlify Forms,
+     והפניה עדיין נשמרת שם במקום להיעלם.
   --------------------------------------------------------------- */
   var form = document.getElementById('contactForm');
   var note = document.getElementById('formNote');
@@ -87,7 +92,7 @@
       // לנווט. אחרת המבקר נזרק לעמוד התודה הגנרי של Netlify — באנגלית,
       // בלי העיצוב של האתר. ככה הוא נשאר בעמוד ומקבל אישור בעברית.
       // (בפתיחה מקומית מהדיסק אין לאן לשלוח — נופלים חזרה לוואטסאפ)
-      if (FORM_MODE === 'server' && location.protocol !== 'file:') {
+      if ((FORM_MODE === 'treelee' || FORM_MODE === 'server') && location.protocol !== 'file:') {
         e.preventDefault();
         if (!form.reportValidity()) return;
 
@@ -95,11 +100,27 @@
         var btnLabel = btn ? btn.textContent : '';
         if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
 
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(form)).toString()
-        })
+        var d = new FormData(form);
+        var request = FORM_MODE === 'treelee'
+          ? fetch(TREELEE_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                apiKey: TREELEE_API_KEY,
+                name: d.get('name') || '',
+                phone: d.get('phone') || '',
+                email: d.get('email') || '',
+                message: d.get('message') || '',
+                company: d.get('company') || ''   // מלכודת ספאם
+              })
+            })
+          : fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(d).toString()
+            });
+
+        request
           .then(function (res) {
             if (!res.ok) throw new Error('HTTP ' + res.status);
             form.reset();
