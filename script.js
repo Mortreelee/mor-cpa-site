@@ -6,16 +6,6 @@
 
   var WA_NUMBER = '972525486486'; // מספר הוואטסאפ, בפורמט בינלאומי ללא +
 
-  /* ------------------------------------------------------------
-     כתובת הצ'אטבוט (Treelee).
-     צורת הכתובת הצפויה: https://treelee.ai/bot/<token>
-     כל עוד הערך ריק — כפתורי "התחלת בדיקה" מפנים לוואטסאפ,
-     כדי שלא יהיה באתר קישור מת.
-     ------------------------------------------------------------ */
-  var CHAT_URL = '';
-
-  // true = הצ'אט נפתח בלשונית חדשה, false = באותה לשונית
-  var CHAT_NEW_TAB = true;
 
   // איך נשלח טופס יצירת הקשר:
   //   'whatsapp' — נפתח וואטסאפ עם הפרטים מוכנים (עובד מיד, בלי שום הגדרה)
@@ -74,21 +64,21 @@
     }
   }
 
-  /* ---------- הזרקת הקישור לצ'אטבוט ----------
-     כל <a data-chat-link> באתר מקבל את CHAT_URL.
-     אם CHAT_URL ריק, הקישור נשאר כפי שהוא ב-HTML (וואטסאפ),
-     כדי שהאתר לעולם לא יציג כפתור שלא עושה כלום.
+  /* ---------- רשת ביטחון לצ'אטבוט ----------
+     הצ'אטבוט נטען מ-treelee.ai. אם הסקריפט נחסם (חוסם פרסומות,
+     רשת ארגונית, תקלה בשרת) — הכרטיס יישאר ריק והמבקר לא יבין למה.
+     לכן: בודקים אחרי 10 שניות אם נכנס משהו לתוך ה-div,
+     ואם לא — מציגים מסלול חלופי בוואטסאפ במקום ריבוע ריק.
   --------------------------------------------------------------- */
-  var chatLinks = document.querySelectorAll('a[data-chat-link]');
+  var botSlot = document.querySelector('[data-taxbot]');
+  var botFallback = document.getElementById('chatFallback');
 
-  if (CHAT_URL) {
-    Array.prototype.forEach.call(chatLinks, function (a) {
-      a.href = CHAT_URL;
-      if (CHAT_NEW_TAB) {
-        a.target = '_blank';
-        a.rel = 'noopener';
-      }
-    });
+  if (botSlot && botFallback) {
+    setTimeout(function () {
+      var empty = botSlot.children.length === 0 &&
+                  botSlot.textContent.trim() === '';
+      if (empty) botFallback.hidden = false;
+    }, 10000);
   }
 
   /* ---------- טופס יצירת קשר ----------

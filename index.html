@@ -109,9 +109,9 @@
 </section>
 
 <!-- ========== בדיקת זכאות — הצ'אטבוט ==========
-     הקישור לצ'אטבוט מוגדר במשתנה CHAT_URL בראש script.js,
-     והוא מוזרק לכל הקישורים שמסומנים ב-data-chat-link.
-     כל עוד הוא ריק — הכפתורים מפנים לוואטסאפ, כדי שלא יהיה קישור מת. -->
+     הצ'אטבוט של Treelee מוטמע כאן בתוך הדף (inline), ולא נפתח כחלון נפרד.
+     שאר הכפתורים באתר ("התחלת בדיקה", "לבדיקה בצ'אט", "להתחלה")
+     מגללים לכאן באמצעות #check. -->
 <section class="section section-dark" id="check">
   <div class="wrap narrow">
     <div class="section-head center wide">
@@ -141,9 +141,16 @@
         </li>
       </ul>
 
-      <a class="btn btn-primary btn-lg" href="https://wa.me/972525486486" data-chat-link>
-        לתחילת הבדיקה
-      </a>
+      <!-- הצ'אטבוט של Treelee. סקריפט הטעינה נמצא בתחתית הדף. -->
+      <div class="chat-embed" id="chatEmbed">
+        <div data-taxbot="tb_05c257614b6f66f681bc9596e793eed4e54c0c02af3d0cdd" data-bot-id="36" data-mode="inline"></div>
+
+        <!-- מוצג רק אם הווידג'ט לא הצליח להיטען -->
+        <div class="chat-fallback" id="chatFallback" hidden>
+          <p>הצ'אט לא נטען כרגע — אולי בגלל חוסם פרסומות או חיבור איטי.</p>
+          <a class="btn btn-primary" href="https://wa.me/972525486486?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%95%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9B%D7%90%D7%95%D7%AA%20%D7%9C%D7%94%D7%97%D7%96%D7%A8%20%D7%9E%D7%A1" target="_blank" rel="noopener">לבדיקה בוואטסאפ</a>
+        </div>
+      </div>
 
       <p class="chat-note">
         ללא עלות וללא התחייבות. בסיום השאלות מקבלים תשובה בכל מקרה: אם לא נמצא
@@ -236,7 +243,7 @@
       <article class="card card-cta">
         <h3>לא מזהה את עצמך ברשימה?</h3>
         <p>יש עוד לא מעט מצבים ששווה לבדוק.</p>
-        <a class="btn btn-primary" href="https://wa.me/972525486486" data-chat-link>לבדיקה בצ'אט</a>
+        <a class="btn btn-primary" href="#check">לבדיקה בצ'אט</a>
       </article>
     </div>
   </div>
@@ -255,7 +262,7 @@
         <span class="step-n">1</span>
         <h3>עונים על הצ'אט</h3>
         <p>שאלות קצרות על שנות העבודה. 2–3 דקות, בלי מסמכים ובלי עלות — ובסוף תשובה ברורה, לכאן או לכאן.</p>
-        <a class="link-arrow" href="https://wa.me/972525486486" data-chat-link>להתחלה <span aria-hidden="true">←</span></a>
+        <a class="link-arrow" href="#check">להתחלה <span aria-hidden="true">←</span></a>
       </li>
       <li>
         <span class="step-n">2</span>
@@ -450,12 +457,11 @@
 </a>
 
 <!-- ========================================================
-     מקום לצ'אטבוט — כאן מדביקים בעתיד את סקריפט ההטמעה.
-     הכפתור הצף של וואטסאפ כבר מוכן להזיז את עצמו הצידה
-     ברגע שנוסיף למעלה (ב-body) את המחלקה has-chatbot.
-     <div id="chatbot-root"></div>
-     <script src="..."></script>
+     סקריפט הטעינה של הצ'אטבוט (Treelee).
+     הוא מאתר את ה-div עם data-taxbot שנמצא בסקשן #check
+     ומרנדר לתוכו את הצ'אט. async = לא מעכב את טעינת הדף.
      ======================================================== -->
+<script src="https://treelee.ai/widget/loader.js" async></script>
 
 <script src="script.js"></script>
 </body>

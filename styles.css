@@ -320,6 +320,28 @@ p{ margin:0 0 1em; }
 .chat-cta .btn-primary{ background:#7BC9B6; color:#0C1A18; box-shadow:0 8px 26px rgba(123,201,182,.26); }
 .chat-cta .btn-primary:hover{ background:#96D8C7; box-shadow:0 12px 32px rgba(123,201,182,.32); }
 
+/* מסגרת הצ'אטבוט — כרטיס בהיר על הרקע הכהה, כדי שהווידג'ט
+   ייראה חלק מהעיצוב ולא כמו משהו שהודבק. */
+.chat-embed{
+  background:#fff;
+  border-radius:var(--radius);
+  padding:6px;
+  min-height:420px;
+  overflow:hidden;
+  text-align:start;
+  box-shadow:0 10px 34px rgba(0,0,0,.22);
+}
+.chat-embed > div{ width:100%; }
+.chat-embed iframe{ width:100%; border:0; display:block; border-radius:10px; }
+
+.chat-fallback{
+  display:grid; place-items:center; gap:16px;
+  min-height:380px; padding:30px;
+  text-align:center; color:var(--ink-2);
+}
+.chat-fallback[hidden]{ display:none; }
+.chat-fallback p{ margin:0; max-width:34ch; }
+
 .chat-note{
   margin:22px auto 0; max-width:46ch;
   font-size:.93rem; color:#9FB0AC; line-height:1.65;
