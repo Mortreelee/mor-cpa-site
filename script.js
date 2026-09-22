@@ -64,23 +64,6 @@
     }
   }
 
-  /* ---------- רשת ביטחון לצ'אטבוט ----------
-     הצ'אטבוט נטען מ-treelee.ai. אם הסקריפט נחסם (חוסם פרסומות,
-     רשת ארגונית, תקלה בשרת) — הכרטיס יישאר ריק והמבקר לא יבין למה.
-     לכן: בודקים אחרי 10 שניות אם נכנס משהו לתוך ה-div,
-     ואם לא — מציגים מסלול חלופי בוואטסאפ במקום ריבוע ריק.
-  --------------------------------------------------------------- */
-  var botSlot = document.querySelector('[data-taxbot]');
-  var botFallback = document.getElementById('chatFallback');
-
-  if (botSlot && botFallback) {
-    setTimeout(function () {
-      var empty = botSlot.children.length === 0 &&
-                  botSlot.textContent.trim() === '';
-      if (empty) botFallback.hidden = false;
-    }, 3000);
-  }
-
   /* ---------- טופס יצירת קשר ----------
      כרגע FORM_MODE = 'whatsapp': הטופס פותח וואטסאפ עם הפרטים מוכנים,
      כך שהוא עובד מהרגע הראשון בלי שום הגדרה בצד שרת.

@@ -342,6 +342,14 @@ p{ margin:0 0 1em; }
 .chat-fallback[hidden]{ display:none; }
 .chat-fallback p{ margin:0; max-width:34ch; }
 
+.chat-alt{
+  margin:18px 0 0; font-size:.9rem; color:#9FB0AC;
+}
+.chat-alt a{
+  color:#7BC9B6; text-decoration:underline; text-underline-offset:3px;
+}
+.chat-alt a:hover{ color:#96D8C7; }
+
 .chat-note{
   margin:22px auto 0; max-width:46ch;
   font-size:.93rem; color:#9FB0AC; line-height:1.65;
