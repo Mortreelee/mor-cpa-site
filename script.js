@@ -130,7 +130,6 @@
         'שם: ' + (data.get('name') || ''),
         'טלפון: ' + (data.get('phone') || ''),
         'אימייל: ' + (data.get('email') || '—'),
-        'שנות עבודה: ' + (data.get('years') || '—'),
         'הודעה: ' + (data.get('message') || '—')
       ];
 
