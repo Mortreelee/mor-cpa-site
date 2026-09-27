@@ -469,6 +469,21 @@ p{ margin:0 0 1em; }
 .form-note.err{ color:#B4423A; font-weight:500; }
 .hp{ position:absolute; inset-inline-start:-9999px; }
 
+/* אחרי שליחה מוצלחת: השדות מתחלפים בהודעת תודה שממלאת את הריבוע */
+.form.sent{ display:flex; align-items:center; justify-content:center; }
+.form.sent > :not(.form-thanks){ display:none; }
+.form-thanks{ text-align:center; animation:thanks-in .35s ease both; }
+.form-thanks-icon{
+  display:inline-grid; place-items:center;
+  width:64px; height:64px; margin-bottom:18px;
+  border-radius:50%; background:var(--accent-soft); color:var(--accent);
+}
+.form-thanks-icon svg{ width:30px; height:30px; }
+.form-thanks h3{ margin:0 0 8px; font-size:1.6rem; color:var(--accent); }
+.form-thanks p{ margin:0; color:var(--ink-2); }
+@keyframes thanks-in{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){ .form-thanks{ animation:none; } }
+
 /* ---------- פוטר ---------- */
 .site-footer{ background:var(--bg-dark); color:#9FB0AC; padding:52px 0 40px; }
 .footer-inner{ display:grid; gap:22px; text-align:center; justify-items:center; }

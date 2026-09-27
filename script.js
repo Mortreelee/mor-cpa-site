@@ -101,6 +101,7 @@
         if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
 
         var d = new FormData(form);
+        var sent = false;
         var request = FORM_MODE === 'treelee'
           ? fetch(TREELEE_ENDPOINT, {
               method: 'POST',
@@ -123,15 +124,28 @@
         request
           .then(function (res) {
             if (!res.ok) throw new Error('HTTP ' + res.status);
+            // במקום השדות — הודעת תודה שממלאת את כל הריבוע (באותו גובה, בלי קפיצה)
+            form.style.minHeight = form.offsetHeight + 'px';
             form.reset();
-            note.textContent = 'תודה! הפנייה התקבלה ואחזור בהקדם.';
-            note.className = 'form-note ok';
+            var thanks = document.createElement('div');
+            thanks.className = 'form-thanks';
+            thanks.setAttribute('role', 'status');
+            thanks.innerHTML =
+              '<span class="form-thanks-icon" aria-hidden="true">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' +
+              '</span>' +
+              '<h3>תודה! הפנייה התקבלה</h3>' +
+              '<p>אחזור בהקדם.</p>';
+            form.classList.add('sent');
+            form.appendChild(thanks);
+            sent = true;
           })
           .catch(function () {
             note.textContent = 'השליחה נכשלה. אפשר לנסות שוב, או לפנות ישירות בוואטסאפ.';
             note.className = 'form-note err';
           })
           .then(function () {
+            if (sent) return;
             if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
             setTimeout(function () {
               note.textContent = defaultNote;
