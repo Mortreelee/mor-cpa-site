@@ -86,7 +86,7 @@
       <h2>מגישים דוח? אנחנו כאן</h2>
     </div>
 
-    <div class="what-grid five">
+    <div class="what-grid">
       <article class="what">
         <span class="what-ic" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M6 16V10"/><path d="M11 16V6"/><path d="M16 16v-4"/><path d="m14 4 2-2 2 2"/><path d="M16 2v7"/></svg>
@@ -97,10 +97,27 @@
 
       <article class="what">
         <span class="what-ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.7c1.9.7 3.1 2.5 3.5 5.3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-8"/><path d="M14 7h6v6"/></svg>
         </span>
-        <h3>פנסיונרים</h3>
-        <p>קצבה, מענקים ועוד מקורות הכנסה? מרכזים הכל לדוח אחד מסודר.</p>
+        <h3>הכנסות גבוהות</h3>
+        <p>הכנסה שנתית מעל התקרה מחייבת הגשת דוח. בדקו אם עברתם אותה:</p>
+        <!-- התקרות: תקנות מס הכנסה (פטור מהגשת דין וחשבון), תוספת א. מלוחות הניכויים
+             של רשות המסים (כל לוח מפרסם את התקרה של השנה הקודמת). 2026 — יתפרסם בלוח 2027. -->
+        <div class="hi-check">
+          <select id="hiYear" aria-label="שנת מס">
+            <option value="723,000">2025</option>
+            <option value="723,000">2024</option>
+            <option value="723,000">2023</option>
+            <option value="700,000">2022</option>
+            <option value="665,000">2021</option>
+          </select>
+          <b id="hiCap">₪723,000</b>
+        </div>
+        <script>
+          document.getElementById('hiYear').addEventListener('change', function () {
+            document.getElementById('hiCap').textContent = '₪' + this.value;
+          });
+        </script>
       </article>
 
       <article class="what">
@@ -119,33 +136,8 @@
         <p>דרישה להגיש דוח? שולחים לנו צילום, ואנחנו לוקחים את זה משם.</p>
       </article>
 
-      <article class="what">
-        <span class="what-ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-8"/><path d="M14 7h6v6"/></svg>
-        </span>
-        <h3>הכנסות גבוהות</h3>
-        <p>הכנסה שנתית מעל התקרה מחייבת הגשת דוח למס הכנסה. בדקו אם עברתם אותה:</p>
-        <!-- התקרות: תקנות מס הכנסה (פטור מהגשת דין וחשבון), תוספת א. מלוחות הניכויים
-             של רשות המסים (כל לוח מפרסם את התקרה של השנה הקודמת). 2026 — יתפרסם בלוח 2027. -->
-        <div class="hi-check">
-          <label>שנת מס
-            <select id="hiYear" aria-label="שנת מס">
-              <option value="723,000">2025</option>
-              <option value="723,000">2024</option>
-              <option value="723,000">2023</option>
-              <option value="700,000">2022</option>
-              <option value="665,000">2021</option>
-            </select>
-          </label>
-          <span>התקרה: <b id="hiCap">₪723,000</b></span>
-        </div>
-        <script>
-          document.getElementById('hiYear').addEventListener('change', function () {
-            document.getElementById('hiCap').textContent = '₪' + this.value;
-          });
-        </script>
-      </article>
     </div>
+
   </div>
 </section>
 
