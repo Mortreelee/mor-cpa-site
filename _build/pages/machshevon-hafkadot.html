@@ -1,0 +1,70 @@
+
+<!-- ========== מחשבון הפקדות לעצמאי ==========
+     הדף שולח את הנתונים ומקבל רק תוצאות (assets/hafkadot-calc.js). החישוב עצמו לא באתר. -->
+<section class="page-hero kc-hero">
+  <div class="wrap page-hero-inner kc-head">
+    <p class="eyebrow">מחשבון הפקדות לעצמאי</p>
+    <h1>כמה מס <span class="grad">חוסכים בהפקדה</span><br>לפנסיה ולקרן השתלמות?</h1>
+    <p class="lede">מזינים את הרווח מהעסק ואת מה שכבר הפקדתם השנה, ורואים כמה כל הפקדה חוסכת במס, ועד איזה סכום כדאי להפקיד.</p>
+  </div>
+</section>
+
+<section class="section kc-section">
+  <div class="wrap gc-wrap">
+    <form class="gc hf" id="hf" novalidate>
+      <div class="gc-in">
+        <div class="gc-field">
+          <span class="gc-lbl">מי מפקיד/ה?</span>
+          <div class="sexrow" id="hsex" role="group" aria-label="מי מפקיד/ה">
+            <button type="button" data-sex="m" aria-pressed="true">גבר</button>
+            <button type="button" data-sex="f" aria-pressed="false">אישה</button>
+          </div>
+        </div>
+        <div class="gc-field">
+          <span class="gc-lbl">תאריך לידה</span>
+          <div class="gc-date">
+            <select id="bd" aria-label="יום לידה"></select>
+            <select id="bm" aria-label="חודש לידה"></select>
+            <select id="by" aria-label="שנת לידה"></select>
+          </div>
+        </div>
+      </div>
+      <div class="hf-nums">
+        <label class="hf-box">
+          <span class="gc-lbl">רווח שנתי מהעסק</span>
+          <span class="hf-amt"><input id="hInc" inputmode="numeric" placeholder="0" aria-label="רווח שנתי מהעסק"><span>₪</span></span>
+          <small>ההכנסה פחות ההוצאות, לפני מס</small>
+        </label>
+        <label class="hf-box">
+          <span class="gc-lbl">הפקדתי השנה לפנסיה</span>
+          <span class="hf-amt"><input id="hPen" inputmode="numeric" placeholder="0" aria-label="הפקדה לפנסיה השנה"><span>₪</span></span>
+          <small>קרן פנסיה, ביטוח מנהלים או קופת גמל</small>
+          <div class="hf-res" id="rPen" aria-live="polite" hidden></div>
+        </label>
+        <label class="hf-box">
+          <span class="gc-lbl">הפקדתי השנה לקרן השתלמות</span>
+          <span class="hf-amt"><input id="hSf" inputmode="numeric" placeholder="0" aria-label="הפקדה לקרן השתלמות השנה"><span>₪</span></span>
+          <small>קרן השתלמות לעצמאים, מתחילת השנה</small>
+          <div class="hf-res" id="rSf" aria-live="polite" hidden></div>
+        </label>
+      </div>
+      <div class="hf-go"><button class="btn btn-primary" type="submit" id="hGo">לחישוב ←</button></div>
+
+      <div class="gc-out hf-notes" id="hOut" aria-live="polite" hidden>
+        <p class="md-warn" id="hWarn"></p>
+        <p class="md-fac" id="rAge" hidden>מלאו לך 50 — ההטבה על ההפקדה לפנסיה גדולה יותר.</p>
+        <p class="md-fac" id="rHova" hidden></p>
+      </div>
+
+      <div class="kc-cta">
+        <p><b>רוצים לדעת בדיוק?</b> החישוב לא כולל משכורת, קצבה או ביטוח אובדן כושר עבודה. נבדוק את התמונה המלאה ונגיד כמה ולאן להפקיד.</p>
+        <a class="btn btn-ghost" href="{{root}}#contact">דברו איתנו</a>
+      </div>
+    </form>
+
+    <p class="kc-assume" id="hAssume">
+      לפי פקודת מס הכנסה, סעיפים 17(5א), 45א ו־47, ותקנות מס הכנסה (ניכוי תשלומים בעד תגמולים או קיצבה), תש"ם־1980. שנת המס 2026.
+      חובת ההפקדה לפנסיה לעצמאי — חוק ההתייעלות הכלכלית לשנים 2017 ו־2018, פרק ב'.
+    </p>
+  </div>
+</section>

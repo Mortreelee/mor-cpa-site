@@ -1429,3 +1429,33 @@ select option:checked{ background:#1F3A31; color:#FFFFFF; }
 .hi-check select{ font:inherit; font-size:.9rem; font-weight:700; color:var(--ink); padding:4px 8px; border-radius:8px;
   background:rgba(0,0,0,.3); border:1px solid var(--line-2); color-scheme:dark; }
 .hi-check b{ font-size:1.15rem; font-weight:900; color:var(--accent); white-space:nowrap; }
+
+/* מחשבון הפקדות לעצמאי: שלוש תיבות סכום בשורה, וכפתור חישוב */
+.hf-nums{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:22px 30px 0; }
+.hf-box{ display:grid; gap:8px; align-content:start; padding:14px 16px; border-radius:16px; cursor:text;
+  background:rgba(255,255,255,.035); border:1px solid var(--line); }
+.hf-box:focus-within{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(47,227,166,.15); }
+.hf-box small{ color:var(--ink-3); font-size:.78rem; }
+.hf-amt{ display:flex; align-items:baseline; gap:6px; direction:ltr; }
+.hf-amt span{ color:var(--accent-2); font-size:1.1rem; }
+.hf-amt input{ width:100%; min-width:0; font:inherit; font-size:1.5rem; font-weight:800; color:var(--ink); text-align:right; direction:ltr;
+  background:none; border:0; border-bottom:1px solid var(--line-2); padding:2px 0; }
+.hf-amt input:focus{ outline:none; border-bottom-color:var(--accent); }
+.hf-go{ display:flex; justify-content:center; padding:20px 30px 26px; border-bottom:1px solid var(--line); }
+.hf-go .btn{ min-width:200px; }
+.hf-go .btn:disabled{ opacity:.6; cursor:wait; }
+.hf .gc-when b{ color:var(--accent); }
+.hf .gc-when small + b + small{ margin-top:2px; }
+.hf .md-fac + .md-fac{ margin-top:6px; }
+/* הכותרת, הסכום וההסבר באותו גובה בשלוש התיבות, גם כשכותרת נשברת לשתי שורות */
+@supports (grid-template-rows:subgrid){
+  .hf-box{ grid-row:span 4; grid-template-rows:subgrid; align-content:normal; }
+}
+@media (max-width:700px){ .hf-nums{ grid-template-columns:1fr; padding-inline:18px; } }
+.hf-res[hidden]{ display:none; }
+.hf-res{ display:grid; gap:6px; margin-top:4px; padding-top:10px; border-top:1px dashed var(--line-2); font-size:.85rem; color:var(--ink-2); line-height:1.5; }
+.hf-res b{ color:var(--accent); font-size:1rem; }
+.hf-res .hf-more{ color:var(--accent-2); }
+.hf-res .hf-over{ color:#ff9b8a; }
+.hf-notes{ padding-block:18px; }
+.hf-notes .md-fac:first-of-type{ margin-top:0; }
