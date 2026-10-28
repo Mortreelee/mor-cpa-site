@@ -25,7 +25,7 @@
       <h2>מגישים דוח? אנחנו כאן</h2>
     </div>
 
-    <div class="what-grid">
+    <div class="what-grid five">
       <article class="what">
         <span class="what-ic" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M6 16V10"/><path d="M11 16V6"/><path d="M16 16v-4"/><path d="m14 4 2-2 2 2"/><path d="M16 2v7"/></svg>
@@ -56,6 +56,33 @@
         </span>
         <h3>קיבלתם מכתב מרשות המסים?</h3>
         <p>דרישה להגיש דוח? שולחים לנו צילום, ואנחנו לוקחים את זה משם.</p>
+      </article>
+
+      <article class="what">
+        <span class="what-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-8"/><path d="M14 7h6v6"/></svg>
+        </span>
+        <h3>הכנסות גבוהות</h3>
+        <p>משכורת שנתית מעל התקרה מחייבת הגשת דוח למס הכנסה. בדקו אם עברתם אותה:</p>
+        <!-- התקרות: תקנות מס הכנסה (פטור מהגשת דין וחשבון), תוספת א — משכורת. מלוחות הניכויים
+             של רשות המסים (כל לוח מפרסם את התקרה של השנה הקודמת). 2026 — יתפרסם בלוח 2027. -->
+        <div class="hi-check">
+          <label>שנת מס
+            <select id="hiYear" aria-label="שנת מס">
+              <option value="723,000">2025</option>
+              <option value="723,000">2024</option>
+              <option value="723,000">2023</option>
+              <option value="700,000">2022</option>
+              <option value="665,000">2021</option>
+            </select>
+          </label>
+          <span>התקרה: <b id="hiCap">₪723,000</b></span>
+        </div>
+        <script>
+          document.getElementById('hiYear').addEventListener('change', function () {
+            document.getElementById('hiCap').textContent = '₪' + this.value;
+          });
+        </script>
       </article>
     </div>
   </div>

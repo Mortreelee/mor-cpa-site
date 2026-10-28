@@ -1421,3 +1421,18 @@ select option:checked{ background:#1F3A31; color:#FFFFFF; }
 .bot-busy::after{ content:""; position:absolute; top:50%; left:50%; width:28px; height:28px; margin:-14px 0 0 -14px;
   border-radius:50%; border:3px solid rgba(47,227,166,.25); border-top-color:var(--accent); animation:bot-spin .8s linear infinite; }
 @keyframes bot-spin{ to{ transform:rotate(360deg); } }
+
+/* חמישה כרטיסים: שלושה בשורה הראשונה ושניים ממורכזים בשנייה (רק במסך רחב) */
+@media (min-width:981px){
+  .what-grid.five{ grid-template-columns:repeat(6,1fr); }
+  .what-grid.five > *{ grid-column:span 2; }
+  .what-grid.five > :nth-child(4){ grid-column:2 / span 2; }
+}
+
+/* כרטיס "הכנסות גבוהות": שנה ותקרה */
+.hi-check{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:12px; padding:10px 12px;
+  border-radius:12px; background:rgba(47,227,166,.06); border:1px solid rgba(47,227,166,.25); font-size:.92rem; color:var(--ink-2); }
+.hi-check label{ display:flex; align-items:center; gap:8px; }
+.hi-check select{ font:inherit; font-weight:700; color:var(--ink); padding:4px 8px; border-radius:8px;
+  background:rgba(0,0,0,.3); border:1px solid var(--line-2); color-scheme:dark; }
+.hi-check b{ color:var(--accent); font-size:1.05rem; }
