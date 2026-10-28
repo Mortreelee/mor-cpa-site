@@ -28,6 +28,13 @@
   (function () {
     var host = location.hostname;
     if (host !== 'mor-cpa.co.il' && host !== 'www.mor-cpa.co.il') return;
+    // הכניסות שלנו לא נספרות: פעם אחת בכל דפדפן נכנסים ל-?notrack (ול-?track כדי לבטל).
+    // הסימון נשמר רק בדפדפן הזה, ולכן לא משפיע על אף גולש אחר.
+    try {
+      if (/[?&]notrack\b/.test(location.search)) localStorage.setItem('noga', '1');
+      if (/[?&]track\b/.test(location.search)) localStorage.removeItem('noga');
+      if (localStorage.getItem('noga')) return;
+    } catch (e) {}
     var id = 'G-93BLXZ9RBC';
     var s = document.createElement('script'); s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
