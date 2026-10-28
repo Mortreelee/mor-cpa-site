@@ -1459,3 +1459,22 @@ select option:checked{ background:#1F3A31; color:#FFFFFF; }
 .hf-res .hf-over{ color:#ff9b8a; }
 .hf-notes{ padding-block:18px; }
 .hf-notes .md-fac:first-of-type{ margin-top:0; }
+
+/* בוטים: אישור מדיניות פרטיות לפני השליחה, וחלון המדיניות */
+.bot-consent{ display:flex; align-items:flex-start; gap:10px; padding:12px 14px; border-radius:12px; cursor:pointer;
+  background:rgba(47,227,166,.07); border:1px solid rgba(47,227,166,.28); font-size:.88rem; line-height:1.6; color:var(--ink-2); }
+.bot-consent input{ flex:none; width:20px; height:20px; margin:2px 0 0; accent-color:var(--accent); cursor:pointer; }
+.bot-privacy-link{ font:inherit; font-weight:700; color:var(--accent); background:none; border:0; padding:0; cursor:pointer; text-decoration:underline; }
+.bot-contact .btn:disabled{ opacity:.5; cursor:not-allowed; }
+.bot-privacy{ position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:16px;
+  background:rgba(0,0,0,.65); }
+.bot-privacy-panel{ position:relative; width:100%; max-width:540px; max-height:84vh; overflow-y:auto; padding:30px 26px 24px;
+  border-radius:20px; background:var(--bg-2); border:1px solid var(--line-2); box-shadow:0 25px 60px rgba(0,0,0,.5);
+  color:var(--ink-2); font-size:.92rem; line-height:1.8; }
+.bot-privacy-panel h2{ margin:0 0 6px; font-size:1.25rem; color:var(--ink); }
+.bot-privacy-panel p{ margin:0 0 12px; }
+.bot-privacy-panel strong{ color:var(--ink); }
+.bot-privacy-lede{ color:var(--ink-3); }
+.bot-privacy-foot{ margin:16px 0 0 !important; padding-top:14px; border-top:1px solid var(--line); font-size:.85rem; color:var(--ink-3); }
+.bot-privacy-close{ position:absolute; top:14px; left:14px; width:34px; height:34px; border-radius:50%; border:1px solid var(--line-2);
+  background:rgba(255,255,255,.05); color:var(--ink); cursor:pointer; font-size:.95rem; }

@@ -48,6 +48,53 @@
     });
   }
 
+  // אישור פרטיות לפני השליחה, כמו בבוט של Treelee: לשם מה נשמרים הפרטים בכל בוט
+  var PURPOSE = {
+    hechzer: 'בדיקת זכאות להחזר מס',
+    prisha: 'הבדיקה לפורשים',
+    atzmai: 'פתיחת התיק לעצמאי'
+  };
+
+  // חלון מדיניות הפרטיות
+  function showPrivacy(purpose, opener) {
+    var overlay = el('div', 'bot-privacy');
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    var panel = el('div', 'bot-privacy-panel');
+    var close = el('button', 'bot-privacy-close', '✕');
+    close.type = 'button'; close.setAttribute('aria-label', 'סגירה');
+    var h = el('h2', null, 'מדיניות פרטיות ואבטחת מידע');
+    h.id = 'botPrivacyTitle'; overlay.setAttribute('aria-labelledby', h.id);
+    panel.appendChild(close);
+    panel.appendChild(h);
+    panel.appendChild(el('p', 'bot-privacy-lede', 'הפרטיות שלכם חשובה לנו. כך אנחנו אוספים ושומרים את המידע במסגרת ' + purpose + ':'));
+    [
+      ['איסוף המידע', 'אנחנו אוספים את הפרטים שהזנתם מרצונכם (שם, טלפון ומה שכתבתם בהערות), ואת התשובות שלכם בבדיקה.'],
+      ['מטרת השימוש', 'המידע משמש אך ורק כדי לחזור אליכם, לתת לכם שירות מקצועי ולבדוק את המקרה שלכם.'],
+      ['אבטחת המידע', 'הפרטים נשלחים ישירות לתיבת הדואר של העסק ונשמרים בה באופן מאובטח, בהתאם לחוק הגנת הפרטיות, התשמ"א־1981. האתר עצמו לא שומר אותם.'],
+      ['העברה לצד שלישי', 'הפרטים נשמרים בסודיות. לא נמכור, לא נעביר ולא נשתף אותם עם גופים מסחריים או צדדים שלישיים, למעט רשות המסים או גופים ממשלתיים — רק לצורך הטיפול בתיק שלכם, ולאחר שתיתנו לנו ייפוי כוח מפורש.'],
+      ['הזכויות שלכם', 'אפשר לפנות אלינו בכל עת ולבקש לעיין במידע שנאסף עליכם, לתקן אותו או למחוק אותו.']
+    ].forEach(function (row, i) {
+      var p = el('p');
+      p.appendChild(el('strong', null, (i + 1) + '. ' + row[0] + ': '));
+      p.appendChild(doc.createTextNode(row[1]));
+      panel.appendChild(p);
+    });
+    panel.appendChild(el('p', 'bot-privacy-foot', 'בסימון האישור ושליחת הפרטים, אתם מסכימים לאמור במדיניות זו.'));
+    overlay.appendChild(panel);
+
+    function done() {
+      overlay.remove(); doc.removeEventListener('keydown', esc);
+      if (opener) opener.focus();
+    }
+    function esc(e) { if (e.key === 'Escape') done(); }
+    close.onclick = done;
+    overlay.onclick = function (e) { if (e.target === overlay) done(); };
+    doc.addEventListener('keydown', esc);
+    doc.body.appendChild(overlay);
+    close.focus();
+  }
+
   function Bot(box, bot, first) {
     var path = [], views = [], view = first, busy = false;
     var card = el('div', 'bot-card');
@@ -157,15 +204,28 @@
       note.placeholder = v.note || 'יש עוד משהו שחשוב שנדע? (לא חובה)';
       note.rows = 3;
       var trap = el('input', 'hp'); trap.tabIndex = -1; trap.autocomplete = 'off';
+      // אישור פרטיות: כפתור השליחה פעיל רק אחרי הסימון
+      var consent = el('label', 'bot-consent');
+      var check = el('input'); check.type = 'checkbox';
+      var purpose = PURPOSE[bot] || 'הבדיקה';
+      var ctext = el('span', null, 'אני מאשר/ת את שמירת הפרטים לצורך ' + purpose + ' בהתאם ל');
+      var plink = el('button', 'bot-privacy-link', 'מדיניות הפרטיות');
+      plink.type = 'button';
+      plink.onclick = function (e) { e.preventDefault(); showPrivacy(purpose, plink); };
+      ctext.appendChild(plink);
+      consent.appendChild(check); consent.appendChild(ctext);
       var btn = el('button', 'btn btn-primary btn-block', 'שליחה');
+      btn.disabled = true; btn.title = 'יש לאשר את מדיניות הפרטיות לפני השליחה';
+      check.onchange = function () { btn.disabled = !check.checked; btn.title = check.checked ? '' : 'יש לאשר את מדיניות הפרטיות לפני השליחה'; };
       var msg = el('p', 'bot-msg');
-      [name, phone, note, trap, btn, msg].forEach(function (x) { form.appendChild(x); });
+      [name, phone, note, trap, consent, btn, msg].forEach(function (x) { form.appendChild(x); });
       form.onsubmit = function (e) {
         e.preventDefault();
+        if (!check.checked) return;
         btn.disabled = true; btn.textContent = 'שולח…';
         go(null, { name: name.value.trim(), phone: phone.value.trim(), note: note.value.trim(), botcheck: trap.value });
         // אם השליחה נכשלה — fail() מציג הודעה, והכפתור חוזר
-        var t = setInterval(function () { if (!busy) { clearInterval(t); btn.disabled = false; btn.textContent = 'שליחה'; } }, 300);
+        var t = setInterval(function () { if (!busy) { clearInterval(t); btn.disabled = !check.checked; btn.textContent = 'שליחה'; } }, 300);
       };
       screen.appendChild(form);
     }
