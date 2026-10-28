@@ -1,0 +1,127 @@
+
+<!-- ========== מחשבון מס הכנסה ליחיד ==========
+     החישוב ב-assets/mas-calc.js. העיצוב ב-styles.css, תחת ".kc" ו-".mc". -->
+<section class="page-hero kc-hero">
+  <div class="wrap page-hero-inner kc-head">
+    <p class="eyebrow">מחשבון מס הכנסה 2020–2026</p>
+    <h1>כמה <span class="grad">מס הכנסה</span> יורד לך?</h1>
+    <p class="lede">מזינים הכנסה ברוטו, לחודש או לשנה, ורואים כמה מס הכנסה יורד, באיזו מדרגה וכמה נשאר.</p>
+  </div>
+</section>
+
+<section class="section kc-section">
+  <div class="wrap kc-wrap">
+    <div class="kc mc" id="mc">
+      <div class="kc-top">
+        <!-- קלט -->
+        <div class="kc-in">
+          <label class="mc-yr">שנת מס <select id="yr" aria-label="שנת מס"></select></label>
+          <div class="row">
+            <span class="n">1</span>
+            <div><b data-per data-m="הכנסה חודשית ברוטו" data-y="הכנסה שנתית ברוטו">הכנסה חודשית ברוטו</b><small>משכורת, קצבה או עסק</small>
+              <div class="sexrow" id="per" role="group" aria-label="חודשי או שנתי">
+                <button type="button" data-m="1" aria-pressed="true">חודשי</button>
+                <button type="button" data-m="12" aria-pressed="false">שנתי</button>
+              </div>
+            </div>
+            <label class="amt"><input id="inc" inputmode="numeric" value="15,000" aria-label="הכנסה ברוטו"><span>₪</span></label>
+          </div>
+          <div class="row r-cp">
+            <span class="n">2</span>
+            <div><b>נקודות זיכוי</b>
+              <div class="sexrow" id="sex" role="group" aria-label="גבר או אישה">
+                <button type="button" data-cp="2.25" aria-pressed="true">גבר</button>
+                <button type="button" data-cp="2.75" aria-pressed="false">אישה</button>
+              </div>
+            </div>
+            <label class="amt pts"><input id="cpts" inputmode="decimal" value="2.25" aria-label="נקודות זיכוי"><span>נק'</span></label>
+          </div>
+
+          <div class="mc-tools">
+            <button type="button" class="mc-tool" data-box="ptsBox" aria-expanded="false">פירוט נקודות זיכוי <span id="ptsSum"></span></button>
+            <button type="button" class="mc-tool" data-box="townBox" aria-expanded="false">יישוב מוטב <span id="townSum"></span></button>
+          </div>
+
+          <!-- פירוט נקודות הזיכוי. הכללים לכל שנה: _build/mekorot-nekudot.md -->
+          <div class="mc-pts" id="ptsBox" hidden>
+            <div class="mp-sec">
+              <div class="mp-h"><b>ילדים</b><small>לפי שנת הלידה. להורים נשואים או שחיים יחד</small></div>
+              <div id="kids"></div>
+              <button type="button" class="mp-add" id="addKid">+ הוספת ילד/ה</button>
+            </div>
+            <div class="mp-sec">
+              <div class="mp-h"><b>תואר אקדמי</b><small>שנת סיום הלימודים</small></div>
+              <div class="mp-row"><span>תואר ראשון</span><select id="ba" class="mp-sel"></select><em id="baPts"></em></div>
+              <div class="mp-row"><span>תואר שני</span><select id="ma" class="mp-sel"></select><em id="maPts"></em></div>
+            </div>
+            <div class="mp-sec">
+              <div class="mp-h"><b>חייל/ת משוחרר/ת</b><small>36 חודשים מהחודש שאחרי השחרור</small></div>
+              <div class="mp-row"><span>חודש השחרור</span><span class="mp-two"><select id="relM" class="mp-sel"></select><select id="relY" class="mp-sel"></select></span><em id="relPts"></em></div>
+              <label class="mp-chk"><input type="checkbox" id="relFull" checked> שירות מלא (גבר 23 חודשים לפחות, אישה 22)</label>
+            </div>
+            <div class="mp-sec">
+              <div class="mp-row"><span>נקודות נוספות<small>הורה יחיד, גרוש/ה, עולה, ילד עם מוגבלות, תעודת מקצוע ועוד</small></span>
+                <label class="amt pts"><input id="extra" inputmode="decimal" value="0" aria-label="נקודות נוספות"><span>נק'</span></label></div>
+            </div>
+            <p class="mp-total" id="ptsLine"></p>
+          </div>
+
+          <!-- יישוב מוטב, סעיף 11. הנתונים: assets/yishuvim.json -->
+          <div class="mc-pts" id="townBox" hidden>
+            <div class="mp-sec">
+              <div class="mp-row"><span>יישוב מגורים</span>
+                <input id="town" class="mc-town" list="townList" placeholder="שם היישוב" autocomplete="off" aria-label="יישוב מגורים"></div>
+              <datalist id="townList"></datalist>
+              <div class="mc-since" id="sinceRow" hidden>
+                <label><input type="radio" name="since" value="o" checked> גרתי שם לפני 2019</label>
+                <label><input type="radio" name="since" value="w"> עברתי לגור שם מ־2019</label>
+              </div>
+              <p class="mc-tinfo" id="townInfo"></p>
+            </div>
+          </div>
+
+          <div class="mc-stats">
+            <div><small>שיעור מס ממוצע</small><strong id="avg">0%</strong></div>
+            <div><small>המדרגה העליונה שלך</small><strong id="marg">0%</strong></div>
+          </div>
+          <p class="warn" id="warn"></p>
+        </div>
+
+        <!-- תוצאה -->
+        <div class="kc-out" aria-live="polite">
+          <div class="ring" id="ring"><div class="ring-in">
+            <div class="r-ex"><small data-per data-m="נשאר לך בחודש" data-y="נשאר לך בשנה">נשאר לך בחודש</small><strong id="rNet">₪0</strong><span id="rPct">0%</span></div>
+            <div class="r-sep"></div>
+            <div class="r-tx"><small data-per data-m="מס הכנסה בחודש" data-y="מס הכנסה בשנה">מס הכנסה בחודש</small><strong id="rTax">₪0</strong></div>
+          </div></div>
+          <div class="save"><span id="year"></span></div>
+        </div>
+      </div>
+
+      <!-- איך מחושב המס -->
+      <div class="kc-basket">
+        <h3>איך מחושב המס</h3>
+        <p>כל חלק מההכנסה ממוסה בשיעור של המדרגה שלו — לא כל ההכנסה בשיעור הגבוה.</p>
+        <div class="bar" id="bar"></div>
+        <div class="mc-table">
+          <div class="mc-r mc-h"><span>שיעור</span><span data-per data-m="מדרגה (לחודש)" data-y="מדרגה (לשנה)">מדרגה (לחודש)</span><span>הכנסה במדרגה</span><span>מס</span></div>
+          <div id="rows"></div>
+          <div class="mc-r mc-sum"><span></span><span>מס לפי המדרגות</span><span></span><span id="gross">₪0</span></div>
+          <div class="mc-r mc-sum mc-cr"><span></span><span id="creditLbl">נקודות זיכוי</span><span></span><span id="credit">₪0</span></div>
+          <div class="mc-r mc-sum mc-cr" id="townRow" hidden><span></span><span id="townLbl">הטבת יישוב</span><span></span><span id="townCr">₪0</span></div>
+          <div class="mc-r mc-sum mc-tot"><span></span><span>מס הכנסה לתשלום</span><span></span><span id="total">₪0</span></div>
+        </div>
+      </div>
+
+      <div class="kc-cta">
+        <p><b>שילמתם יותר מדי מס?</b> החלפת עבודה, שנה עם הפסקה, הפקדות או תרומות — הרבה פעמים מגיע החזר.</p>
+        <a class="btn btn-primary" href="{{root}}bdika/hechzer/">לבדיקת החזר מס ←</a>
+      </div>
+    </div>
+
+    <p class="kc-assume">
+      חישוב לשנת <span class="js-year">2026</span> לפי לוח הניכויים של רשות המסים, על הכנסה מיגיעה אישית (משכורת, קצבה, עסק).
+      מס הכנסה בלבד — בלי ביטוח לאומי ומס בריאות, ובלי זיכויים נוספים כמו הפקדות לפנסיה או תרומות.
+    </p>
+  </div>
+</section>

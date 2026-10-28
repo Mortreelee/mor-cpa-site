@@ -1,0 +1,113 @@
+
+<!-- ========== מחשבון קיבוע זכויות ==========
+     החישוב ב-assets/kibua-calc.js. העיצוב ב-styles.css, תחת ".kc". -->
+<section class="page-hero kc-hero">
+  <div class="wrap page-hero-inner kc-head">
+    <p class="eyebrow">מחשבון קיבוע זכויות 2026</p>
+    <h1>כמה מהקצבה שלך <span class="grad">תהיה פטורה ממס</span>?</h1>
+    <p class="lede">ממלאים את מה שנמשך בפטור עד היום, ורואים כמה נשאר לקצבה וכמה מס נחסך בכל חודש.</p>
+  </div>
+</section>
+
+<section class="section kc-section">
+  <div class="wrap kc-wrap">
+    <div class="kc" id="kc">
+      <div class="kc-top">
+        <!-- קלט -->
+        <div class="kc-in">
+          <div class="row">
+            <span class="n">1</span>
+            <div><b>קצבה חודשית ברוטו</b><small>הקצבה המזכה, לפני מס</small></div>
+            <label class="amt"><input id="pen" inputmode="numeric" value="10,000" aria-label="קצבה חודשית ברוטו"><span>₪</span></label>
+          </div>
+          <div class="row r-grant">
+            <span class="n">2</span>
+            <div><b>מענקי פרישה שנמשכו בפטור</b><small>פיצויים פטורים, ב־32 שנות העבודה האחרונות</small></div>
+            <label class="amt"><input id="grant" inputmode="numeric" value="0" aria-label="מענקי פרישה שנמשכו בפטור"><span>₪</span></label>
+          </div>
+          <div class="row r-hivun">
+            <span class="n">3</span>
+            <div><b>תגמולים שנמשכו בפטור (היוון)</b><small>היוון קצבה פטור, שנמשך או שמתוכנן</small></div>
+            <label class="amt"><input id="hivun" inputmode="numeric" value="0" aria-label="תגמולים שנמשכו בפטור"><span>₪</span></label>
+          </div>
+          <div class="row r-other">
+            <span class="n">4</span>
+            <div><b>הכנסות נוספות בחודש</b><small>משכורת, שכר דירה חייב או הכנסה אחרת, ברוטו</small></div>
+            <label class="amt"><input id="other" inputmode="numeric" value="0" aria-label="הכנסות נוספות בחודש"><span>₪</span></label>
+          </div>
+          <div class="row r-cp">
+            <span class="n">5</span>
+            <div><b>נקודות זיכוי</b><small>נקבע לפי פורש/ת, ואפשר לשנות (ילדים, תואר, נכות וכו')</small>
+              <div class="sexrow" id="sex" role="group" aria-label="מי פורש/ת">
+                <button type="button" data-cp="2.25" aria-pressed="true">פורש</button>
+                <button type="button" data-cp="2.75" aria-pressed="false">פורשת</button>
+              </div>
+            </div>
+            <label class="amt pts"><input id="cpts" inputmode="decimal" value="2.25" aria-label="נקודות זיכוי"><span>נק'</span></label>
+          </div>
+          <p class="warn" id="warn"></p>
+        </div>
+
+        <!-- תוצאה -->
+        <div class="kc-out" aria-live="polite">
+          <div class="ring" id="ring"><div class="ring-in">
+            <div class="r-ex"><small>פטור ממס</small><strong id="rEx">₪0</strong><span id="pct">0%</span></div>
+            <div class="r-sep"></div>
+            <div class="r-tx"><small>חייב במס</small><strong id="rTx">₪0</strong></div>
+          </div></div>
+          <div class="save">חיסכון במס בכל חודש<strong id="save">₪0</strong><span id="saveY"></span></div>
+        </div>
+      </div>
+
+      <!-- סל ההון הפטור -->
+      <div class="kc-basket">
+        <h3>סל ההון הפטור שלך: <span id="basket"></span></h3>
+        <p>כל שקל שנמשך בפטור יורד מאותו סל. מה שנשאר בו — הופך לפטור על הקצבה.</p>
+        <div class="bar"><i class="b-g" id="bg"></i><i class="b-h" id="bh"></i><i class="b-p" id="bp"></i></div>
+        <div class="keys">
+          <div><small><i class="k-g"></i>ירד בגלל המענקים</small><strong id="kG">₪0</strong></div>
+          <div><small><i class="k-h"></i>ירד בגלל ההיוון</small><strong id="kH">₪0</strong></div>
+          <div><small><i class="k-p"></i>נשאר לקצבה</small><strong id="kP">₪0</strong></div>
+        </div>
+      </div>
+
+      <div class="kc-cta">
+        <p><b>זה החישוב הבסיסי.</b> בבדיקה המלאה אנחנו מראים איך לחלק את הסל בצורה הכי משתלמת לך — מינימום מס, מקסימום קצבה או מקסימום מזומן.</p>
+        <a class="btn btn-primary" href="{{root}}bdika/prisha/">לבדיקה המלאה ←</a>
+      </div>
+    </div>
+
+    <p class="kc-assume">
+      חישוב לשנת 2026, בהנחה שהמענקים התקבלו אחרי 14.5.2012, בלי הצמדה למדד
+      ובלי יחסיות ליותר מ־32 שנות עבודה. זו הערכה ראשונית בלבד.
+    </p>
+  </div>
+</section>
+
+<!-- ========== הסבר קצר ========== -->
+<section class="section section-alt" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head center">
+      <p class="kicker">איך זה עובד</p>
+      <h2>שאלות על הקיבוע זכויות</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>מה זה סל ההון הפטור?</summary>
+        <p>הסכום שאפשר לקבל בפטור ממס מגיל הזכאות לקצבה. למי שמגיע לגיל הזכאות ב־2026 הוא 976,005 ₪. אפשר לנצל אותו כפטור חודשי על הקצבה, או למשוך ממנו סכום חד־פעמי בפטור (היוון).</p>
+      </details>
+      <details>
+        <summary>למה מענקי פרישה מקטינים את הסל?</summary>
+        <p>מענקי פרישה שנמשכו בפטור ב־32 שנות העבודה האחרונות "נלקחים" מאותו סל, מוכפלים במקדם. כך הפטור לא ניתן פעמיים — פעם על המענק ופעם על הקצבה. חלק מהסל לעולם לא נשחק מהמענקים.</p>
+      </details>
+      <details>
+        <summary>למה הכנסות נוספות משנות את החיסכון?</summary>
+        <p>הפטור חוסך מס במדרגה שבה נמצאת הקצבה. אם יש גם משכורת או הכנסה אחרת, הקצבה יושבת במדרגה גבוהה יותר — ולכן כל שקל פטור שווה יותר.</p>
+      </details>
+      <details>
+        <summary>האם זה מחליף בדיקה מקצועית?</summary>
+        <p>לא. המחשבון נותן הערכה ראשונית. בבדיקה המלאה אנחנו מתחשבים בתאריכי המענקים, בהצמדה למדד, בשנות העבודה ובכל ההכנסות, ומראים כמה דרכים לחלק את הסל.</p>
+      </details>
+    </div>
+  </div>
+</section>

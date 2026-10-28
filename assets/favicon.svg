@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="MOR CPA">
+  <rect x=".5" y=".5" width="47" height="47" rx="12.5" fill="#0F1A1C" stroke="#2FE3A6" stroke-opacity=".45"/>
+  <path d="M11 33l8.5-9 6 5.5L37 16" fill="none" stroke="#2FE3A6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30 16h7v7" fill="none" stroke="#F2C14E" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

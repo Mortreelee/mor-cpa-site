@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<link rel="canonical" href="https://mor-cpa.co.il/{{path}}">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:url" content="https://mor-cpa.co.il/{{path}}">
+<meta property="og:image" content="https://mor-cpa.co.il/assets/home.jpg">
+<meta name="theme-color" content="#070B0D">
+
+<link rel="icon" href="{{root}}assets/favicon.svg?v=2" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{root}}styles.css">
+</head>
+<body>
+
+<a class="skip" href="#main">דילוג לתוכן הראשי</a>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{root}}">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <rect x=".5" y=".5" width="47" height="47" rx="12.5" fill="#0F1A1C" stroke="#2FE3A6" stroke-opacity=".45"/>
+          <path d="M11 33l8.5-9 6 5.5L37 16" fill="none" stroke="#2FE3A6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M30 16h7v7" fill="none" stroke="#F2C14E" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <strong>MOR CPA</strong>
+        <small>המס שלך, בקלות</small>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="ניווט ראשי">
+{{nav}}
+      <a href="{{root}}#contact" class="nav-cta">דברו איתנו</a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="פתיחת תפריט" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+{{content}}
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="footer-mark" aria-hidden="true">MOR</span>
+      <strong>MOR CPA</strong> · החזרי מס, פרישה וקיבוע זכויות, דוחות שנתיים
+      <p class="small">דיגיטלי · מכל מקום בארץ</p>
+    </div>
+    <nav class="footer-nav" aria-label="ניווט תחתון">
+{{footer_nav}}
+      <a href="{{root}}#contact">יצירת קשר</a>
+    </nav>
+    <p class="small copy">© <span id="year">2026</span> MOR CPA. האמור באתר הוא מידע כללי בלבד ואינו מהווה ייעוץ מס.</p>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/972525486486" target="_blank" rel="noopener" aria-label="שליחת הודעה בוואטסאפ">
+  {{wa_icon}}
+</a>
+
+<script src="{{root}}assets/config.js"></script>
+<script src="{{root}}script.js"></script>{{scripts}}
+</body>
+</html>

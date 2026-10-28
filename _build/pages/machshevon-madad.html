@@ -1,0 +1,58 @@
+
+<!-- ========== מחשבון הצמדה למדד ==========
+     החישוב ב-assets/madad-calc.js, הנתונים ב-assets/madad.json (הלמ"ס, סדרה 120010). -->
+<section class="page-hero kc-hero">
+  <div class="wrap page-hero-inner kc-head">
+    <p class="eyebrow">מחשבון הצמדה למדד</p>
+    <h1>כמה הסכום שווה <span class="grad">היום,</span><br><span class="grad">לפי המדד</span>?</h1>
+  </div>
+</section>
+
+<section class="section kc-section">
+  <div class="wrap gc-wrap">
+    <div class="gc md" id="md">
+      <div class="md-in">
+        <label class="md-box md-sum">
+          <span class="gc-lbl">סכום</span>
+          <span class="md-amt"><input id="amt" inputmode="decimal" value="5,000" aria-label="סכום"><span>₪</span></span>
+        </label>
+        <div class="md-dates">
+          <div class="md-box">
+            <span class="gc-lbl">תאריך התחלה</span>
+            <div class="md-date"><select id="aD" aria-label="יום"></select><select id="aM" aria-label="חודש"></select><select id="aY" aria-label="שנה"></select></div>
+            <small class="md-idx" id="aIdx"></small>
+          </div>
+          <span class="md-arrow" aria-hidden="true">←</span>
+          <div class="md-box">
+            <span class="gc-lbl">תאריך סיום</span>
+            <div class="md-date"><select id="bD" aria-label="יום"></select><select id="bM" aria-label="חודש"></select><select id="bY" aria-label="שנה"></select></div>
+            <small class="md-idx" id="bIdx"></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="gc-out" aria-live="polite">
+        <p class="md-warn" id="mdWarn"></p>
+        <div id="mdOut">
+          <div class="gc-main">
+            <strong id="res">—</strong>
+          </div>
+          <div class="gc-when">
+            <div><small>השינוי במדד</small><b id="chg">—</b></div>
+            <div><small>הפרש בסכום</small><b id="diff">—</b></div>
+          </div>
+          <p class="md-fac">מקדם הצמדה <span id="fac"></span> · המדד האחרון שפורסם: <span id="latest"></span></p>
+        </div>
+      </div>
+
+      <div class="kc-cta">
+        <p><b>איך זה מחושב?</b> לפי המדד הידוע בכל תאריך: המדד מתפרסם ב־15 בחודש, ולכן מה־16 ידוע המדד של החודש הקודם, ועד ה־15 — של החודש שלפניו.</p>
+        <a class="btn btn-ghost" href="{{root}}#contact">שאלה? דברו איתנו</a>
+      </div>
+    </div>
+
+    <p class="kc-assume">
+      מדד המחירים לצרכן, כללי, של הלשכה המרכזית לסטטיסטיקה, כולל מקדמי השרשור בין בסיסי המדד. מ־1990.
+    </p>
+  </div>
+</section>

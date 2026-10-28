@@ -1,0 +1,63 @@
+
+<!-- ========== מחשבון גיל פרישה ==========
+     החישוב ב-assets/gil-calc.js (טבלאות חוק גיל פרישה מתוך כלי קיבוע הזכויות). -->
+<section class="page-hero kc-hero">
+  <div class="wrap page-hero-inner kc-head">
+    <p class="eyebrow">מחשבון גיל פרישה</p>
+    <h1>מתי <span class="grad">תגיעו לגיל פרישה</span>?</h1>
+    <p class="lede">מזינים תאריך לידה, ומקבלים את גיל הפרישה ואת התאריך המדויק — לפי חוק גיל פרישה.</p>
+  </div>
+</section>
+
+<section class="section kc-section">
+  <div class="wrap gc-wrap">
+    <div class="gc" id="gc">
+      <div class="gc-in">
+        <div class="gc-field">
+          <span class="gc-lbl">מי פורש/ת?</span>
+          <div class="sexrow" id="gsex" role="group" aria-label="מי פורש/ת">
+            <button type="button" data-sex="m" aria-pressed="true">גבר</button>
+            <button type="button" data-sex="f" aria-pressed="false">אישה</button>
+          </div>
+        </div>
+        <div class="gc-field">
+          <span class="gc-lbl">תאריך לידה</span>
+          <div class="gc-date">
+            <select id="bd" aria-label="יום לידה"></select>
+            <select id="bm" aria-label="חודש לידה"></select>
+            <select id="by" aria-label="שנת לידה"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="gc-out" aria-live="polite">
+        <div class="gc-main">
+          <small>גיל הפרישה שלך</small>
+          <strong id="gAge">—</strong>
+        </div>
+        <div class="gc-when">
+          <div><small>תאריך גיל הפרישה</small><b id="gDate">—</b></div>
+          <div><small>מהיום</small><b id="gLeft" class="gc-left">—</b></div>
+        </div>
+        <div class="gc-track"><span id="gBar"></span></div>
+        <div class="gc-rate">
+          <span>שיעור הפטור על הקצבה בשנת <b id="gRateY"></b></span>
+          <strong id="gRate">—</strong>
+        </div>
+      </div>
+
+      <div class="kc-cta">
+        <p><b>מה עושים כשמגיעים לגיל?</b><br>זה הזמן לקיבוע זכויות ולתכנון המס על המענקים. נבדוק בשבילך מה הכי משתלם.</p>
+        <div class="gc-ctas">
+          <a class="btn btn-ghost" href="{{root}}machshevon/kibua/">למחשבון הקיבוע</a>
+          <a class="btn btn-primary" href="{{root}}bdika/prisha/">לבדיקה לפורשים ←</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="kc-assume">
+      לפי חוק גיל פרישה, התשס"ד-2004: 67 לגבר, ולאישה בין 62 ל־65 לפי חודש הלידה.
+      גיל הזכאות לפטור על הקצבה הוא גיל הפרישה או מועד תחילת הקצבה — המאוחר מביניהם.
+    </p>
+  </div>
+</section>

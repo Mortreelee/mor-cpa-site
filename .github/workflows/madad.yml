@@ -1,0 +1,31 @@
+# עדכון חודשי של מחשבון המדד: מוסיף ל-assets/madad.json כל מדד חדש שהלמ"ס פרסם.
+# המדד מתפרסם ב-15 בחודש בערב; הריצה בכל יום בין ה-16 ל-22, ואם אין חדש — לא קורה כלום.
+name: עדכון מדד
+
+on:
+  schedule:
+    - cron: '0 6 16-22 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: הוספת מדדים חדשים
+        run: python3 _build/update_madad.py
+      - name: שמירה ובניית האתר
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then echo "אין מדד חדש"; exit 0; fi
+          git config user.name "MOR CPA"
+          git config user.email "imron962962@gmail.com"
+          git add assets/madad.json
+          git commit -m "עדכון מדד המחירים לצרכן"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds"
