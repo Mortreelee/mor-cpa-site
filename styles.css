@@ -122,6 +122,9 @@ p{ margin:0 0 1em; }
 .btn-wa{ background:#25D366; color:#062512; box-shadow:0 8px 26px rgba(37,211,102,.25); }
 .btn-wa:hover{ background:#3ee07c; }
 .btn-wa svg{ width:20px; height:20px; }
+.btn-call{ white-space:nowrap; }
+.btn-call svg{ width:19px; height:19px; flex:none; }
+.contact-btns{ display:flex; flex-wrap:wrap; gap:12px; }
 
 .link-arrow{
   display:inline-flex; align-items:center; gap:8px;
