@@ -1109,6 +1109,76 @@ body.has-chatbot .wa-float{ bottom:92px; }
 .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .reveal.in{ opacity:1; transform:none; }
 
+/* ---------- מודעת צד: שנת 2020 נסגרת (עמוד החזרי מס, עד 31.12.2026) ----------
+   קבועה בצד שמאל למטה; כפתור הוואטסאפ נשאר בצד ימין. במובייל: פס צר למטה.
+   מסגרת בגרדיאנט זהב→מנטה, הילה זהובה עדינה למעלה, והשניות בצבע המותג. */
+.promo2020{
+  position:fixed; inset-inline-end:22px; bottom:22px; z-index:89;
+  width:272px; padding:20px 20px 18px; overflow:hidden;
+  border:1px solid transparent; border-radius:var(--radius-lg);
+  background:
+    linear-gradient(rgba(10,16,19,.96), rgba(10,16,19,.96)) padding-box,
+    linear-gradient(140deg, rgba(242,193,78,.85), rgba(242,193,78,.12) 45%, rgba(47,227,166,.7)) border-box;
+  box-shadow:var(--shadow-md), 0 0 40px rgba(242,193,78,.10);
+  text-align:center;
+  animation:promo2020-in .6s cubic-bezier(.2,.7,.2,1) both .4s;
+}
+.promo2020::before{
+  content:""; position:absolute; inset:-60px -40px auto; height:140px; pointer-events:none;
+  background:radial-gradient(closest-side, rgba(242,193,78,.16), transparent);
+}
+.promo2020 > *{ position:relative; }
+.promo2020[hidden]{ display:none; }
+@keyframes promo2020-in{ from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:none; } }
+
+.promo2020-close{ position:absolute; top:10px; left:10px; z-index:1; width:28px; height:28px; border-radius:50%;
+  border:0; background:transparent; color:var(--ink-3); cursor:pointer; font-size:.8rem; }
+.promo2020-close:hover{ color:var(--ink); background:var(--surface-2); }
+
+.promo2020-tag{ display:inline-flex; align-items:center; gap:7px; margin:0 0 8px; padding:4px 11px;
+  font-size:.72rem; font-weight:700; letter-spacing:.02em; color:var(--accent-2);
+  background:rgba(242,193,78,.10); border:1px solid rgba(242,193,78,.28); border-radius:99px; }
+.promo2020-dot{ width:7px; height:7px; border-radius:50%; background:var(--accent-2);
+  box-shadow:0 0 0 0 rgba(242,193,78,.6); animation:promo2020-pulse 1.8s ease-out infinite; }
+@keyframes promo2020-pulse{ 70%{ box-shadow:0 0 0 7px rgba(242,193,78,0); } 100%{ box-shadow:0 0 0 0 rgba(242,193,78,0); } }
+
+.promo2020-title{ margin:0 0 14px; font-size:1.12rem; font-weight:800; color:var(--ink); line-height:1.25; }
+.promo2020-title .grad{ font-size:1.25em; }
+
+.promo2020-clock{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr auto 1fr; align-items:start; gap:3px; direction:ltr; }
+.promo2020-clock span{ display:flex; flex-direction:column; align-items:center; padding:9px 0 7px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+  border:1px solid var(--line-2); border-radius:12px; }
+.promo2020-clock b{ font-size:1.5rem; font-weight:800; line-height:1.05; font-variant-numeric:tabular-nums; color:var(--ink); }
+.promo2020-clock span:last-child{ border-color:rgba(47,227,166,.35); background:var(--accent-soft); }
+.promo2020-clock span:last-child b{ color:var(--accent); }
+.promo2020-clock small{ font-size:.66rem; color:var(--ink-3); margin-top:3px; }
+.promo2020-clock i{ font-style:normal; font-weight:800; font-size:1.2rem; color:rgba(242,193,78,.55); padding-top:9px; }
+
+.promo2020-line{ margin:14px 0 16px; font-size:.9rem; line-height:1.5; color:var(--ink-2); text-wrap:balance; }
+.promo2020-cta{ padding:12px 16px; font-size:.97rem; font-weight:700; }
+
+@media (prefers-reduced-motion:reduce){ .promo2020, .promo2020-dot{ animation:none; } }
+
+@media (max-width:760px){
+  .promo2020{ inset-inline-start:80px; inset-inline-end:12px; bottom:14px; width:auto;
+    padding:10px 12px; display:grid; grid-template-columns:auto 1fr; align-items:center; gap:6px 10px; text-align:start; }
+  .promo2020[hidden]{ display:none; }
+  .promo2020::before{ inset:-50px -30px auto; height:90px; }
+  .promo2020-tag{ display:none; }
+  .promo2020-title{ grid-column:1 / -1; margin:0; font-size:.82rem; padding-inline-end:24px; }
+  .promo2020-title .grad{ font-size:1.1em; }
+  .promo2020-clock{ grid-column:1; grid-template-columns:repeat(4,auto); gap:4px; }
+  .promo2020-clock i{ display:none; }
+  .promo2020-clock span{ padding:4px 6px 3px; border-radius:8px; min-width:34px; }
+  .promo2020-clock b{ font-size:.98rem; }
+  .promo2020-clock small{ font-size:.55rem; margin-top:1px; }
+  .promo2020-line{ display:none; }
+  .promo2020-cta{ grid-column:2; padding:10px; font-size:.84rem; white-space:nowrap; }
+  .promo2020-cta-x{ display:none; }
+  .promo2020-close{ top:4px; left:4px; }
+}
+
 /* זרקור עדין שעוקב אחרי העכבר בכרטיסים */
 .card::after, .steps li::after{
   content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
