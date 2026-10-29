@@ -789,6 +789,7 @@ a.what:hover h3{ color:var(--accent); }
 .bot-wa-self{ color:#25D366; font-weight:600; font-size:.95rem; }
 
 .bot-contact{ display:grid; gap:10px; }
+input[type="tel"]{ text-align:right; }   /* הדפדפן מיישר שדה טלפון לשמאל; המספר עצמו נשאר משמאל לימין */
 .bot-contact textarea{ resize:vertical; }
 .bot-msg{ margin:0; color:#FF8A7A; font-size:.9rem; min-height:1em; }
 
