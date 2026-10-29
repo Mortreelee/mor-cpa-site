@@ -23,7 +23,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet; then echo "אין מדד חדש"; exit 0; fi
-          git config user.name "MOR CPA"
+          git config user.name "YOURS"
           git config user.email "imron962962@gmail.com"
           git add assets/madad.json
           git commit -m "עדכון מדד המחירים לצרכן"

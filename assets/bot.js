@@ -1,5 +1,5 @@
 /* ============================================================
-   MOR CPA — נגן בוטים
+   YOURS — נגן בוטים
    הבוט רץ בשרת (הסקריפט בחשבון ה-Google של העסק, אותה כתובת של שליחת הפניות
    ב-assets/config.js). האתר לא מחזיק את עץ השאלות: הוא שולח את המסלול שהגולש
    עבר עד עכשיו, ומקבל בחזרה רק את המסך הבא. בסוף, השרת עצמו שולח את הפנייה למייל.
@@ -189,7 +189,7 @@
         v.docs.forEach(function (d) { ul.appendChild(el('li', null, d)); });
         box.appendChild(ul);
         var wa = el('a', 'bot-wa-self', 'שמירת הרשימה אצלי בוואטסאפ');
-        wa.href = 'https://wa.me/?text=' + encodeURIComponent('המסמכים ש-MOR CPA צריכים ממני:\n' + v.docs.map(function (d) { return '□ ' + d; }).join('\n'));
+        wa.href = 'https://wa.me/?text=' + encodeURIComponent('המסמכים ש-YOURS צריכים ממני:\n' + v.docs.map(function (d) { return '□ ' + d; }).join('\n'));
         wa.target = '_blank'; wa.rel = 'noopener';
         box.appendChild(wa);
         screen.appendChild(box);
