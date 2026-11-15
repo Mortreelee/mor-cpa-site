@@ -31,6 +31,10 @@ PAGES = [
     {"path": "dochot/", "file": "dochot.html",
      "title": "דוחות שנתיים · YOURS",
      "desc": "מכינים ומגישים את הדוח השנתי לרשות המסים, כולל הדוחות שמוגשים בשנים שבהן נפרס מענק פרישה."},
+    # עצמאים — עוסק פטור ועוסק מורשה. "bot": בעמוד מוטמע בוט פתיחת התיק (data-bot="atzmai")
+    {"path": "atzmaim/", "file": "atzmaim.html", "bot": True,
+     "title": "הנהלת חשבונות ודוחות לעצמאים · YOURS",
+     "desc": "עוסק פטור ועוסק מורשה: פתיחת תיק, דיווחי מע״מ ומקדמות, דוח שנתי ותכנון מס."},
 
     # הבוטים — תבנית אחת (bot.html). bot_file = שם הבוט בשרת (Apps Script); העץ עצמו לא באתר
     {"path": "bdika/hechzer/", "file": "bot.html", "bot": True,
@@ -123,6 +127,7 @@ def render(page):
     html = html.replace("{{wa_refund}}", wa_link("היי YOURS, אשמח לבדוק זכאות להחזר מס"))
     html = html.replace("{{wa_prisha}}", wa_link("היי YOURS, אני לקראת פרישה ואשמח לבדוק את המיסוי"))
     html = html.replace("{{wa_dochot}}", wa_link("היי YOURS, אשמח לקבל הצעה לדוח שנתי"))
+    html = html.replace("{{wa_atzmai}}", wa_link("היי YOURS, אני עצמאי/ת ואשמח לשמוע על ליווי"))
     html = html.replace("{{wa_general}}", wa_link("היי YOURS, הגעתי מהאתר ואשמח לשמוע פרטים"))
     html = html.replace("{{root}}", root)
     return html
