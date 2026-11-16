@@ -97,7 +97,7 @@
   }
 
   function Bot(box, bot, first) {
-    var path = [], views = [], view = first, busy = false;
+    var path = [], views = [], view = first, busy = false, started = false;
     var card = el('div', 'bot-card');
     var bar = el('div', 'bot-progress'); var fill = el('span'); bar.appendChild(fill);
     var body = el('div', 'bot-body');
@@ -113,7 +113,7 @@
     // צעד קדימה: שולחים לשרת את המסלול החדש ומחכים למסך הבא
     function go(stepItem, extra) {
       if (busy) return;
-      busy = true; card.classList.add('bot-busy');
+      busy = true; started = true; card.classList.add('bot-busy');
       var next = path.concat([stepItem]);
       var req = { action: 'bot', bot: bot, path: extra ? path : next };
       if (extra) { req.submit = true; req.contact = extra; }
@@ -175,7 +175,8 @@
         bk.type = 'button'; bk.onclick = back;
         body.appendChild(bk);
       }
-      card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      // גוללים אל הבוט רק אחרי שהגולש התחיל, לא כשהעמוד נטען (בעמוד העצמאים הבוט באמצע העמוד)
+      if (started) card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
 
     function renderEnding(screen, v) {
