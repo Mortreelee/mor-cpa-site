@@ -651,6 +651,13 @@ a.what:hover h3{ color:var(--accent); }
   .bg-prisha{ --bg-img:url("assets/prisha.jpg"); }
   .bg-dochot{ --bg-img:url("assets/dochot.jpg"); }
   .bg-atzmaim{ --bg-img:url("assets/atzmaim.jpg"); }
+  /* עצמאים: מחשיכים פחות, כדי שלחיצת הידיים תיראה גם בטלפון */
+  .bg-atzmaim{
+    background:
+      linear-gradient(180deg, rgba(7,11,13,.5), rgba(7,11,13,.72) 70%, var(--bg)),
+      var(--bg-img) 30% center / cover no-repeat,
+      var(--bg);
+  }
 }
 
 /* ---------- באיזה שלב אתם ---------- */
