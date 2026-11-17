@@ -1058,9 +1058,11 @@ input[type="tel"]{ text-align:right; }   /* הדפדפן מיישר שדה טל�
   background:#25D366; color:#fff;
   border-radius:50%;
   box-shadow:0 8px 26px rgba(37,211,102,.35);
-  transition:transform .2s ease;
+  transition:transform .2s ease, opacity .25s ease, visibility .25s;
 }
 .wa-float:hover{ transform:scale(1.07); }
+/* כשבוט נראה על המסך — הכפתור נעלם, כדי שלא יכסה את הבוט (bot.js מוסיף את ה-class) */
+body.bot-on-screen .wa-float{ opacity:0; visibility:hidden; pointer-events:none; }
 .wa-float svg{ width:30px; height:30px; }
 /* כשנוסיף צ'אטבוט: להוסיף class="has-chatbot" ל-body והכפתור יזוז למעלה */
 body.has-chatbot .wa-float{ bottom:92px; }

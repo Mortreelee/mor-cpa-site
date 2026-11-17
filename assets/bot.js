@@ -235,8 +235,25 @@
     render();
   }
 
+  // בועת הוואטסאפ הצפה נעלמת כשבוט נראה על המסך, כדי שלא תכסה אותו (styles.css: body.bot-on-screen)
+  function hideWaNearBot(boxes) {
+    if (!('IntersectionObserver' in root) || !boxes.length) return;
+    var seen = [];
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target);
+        if (e.isIntersecting && i < 0) seen.push(e.target);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      doc.body.classList.toggle('bot-on-screen', seen.length > 0);
+    });
+    boxes.forEach(function (b) { io.observe(b); });
+  }
+
   function boot() {
-    Array.prototype.forEach.call(doc.querySelectorAll('.bot[data-bot]'), function (box) {
+    var boxes = Array.prototype.slice.call(doc.querySelectorAll('.bot[data-bot]'));
+    hideWaNearBot(boxes);
+    boxes.forEach(function (box) {
       var bot = box.getAttribute('data-bot');
       box.classList.add('bot-busy');
       ask({ action: 'bot', bot: bot, path: [] })
